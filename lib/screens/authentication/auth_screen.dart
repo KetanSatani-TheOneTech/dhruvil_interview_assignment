@@ -34,8 +34,8 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isLogin ? "Login" : "Sign Up"),
-        backgroundColor: Colors.lightBlue,
+        title: Text(_isLogin ? "Login" : "Sign Up",style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.purple,
       ),
       body: SafeArea(
           child: Padding(

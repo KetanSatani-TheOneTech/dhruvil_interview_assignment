@@ -77,9 +77,10 @@ class ProductDetailsScreen extends StatelessWidget {
                       ),
                       onPressed: () {
                         cartProvider.addToCart(product);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Added to Cart")),
-                        );
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text("Added to Cart"),
+                          duration: Duration(seconds: 1),
+                        ));
                       },
                     ),
                   ),

@@ -45,8 +45,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Product Listing"),
-        backgroundColor: Colors.lightBlue,
+        title: Text("Product Listing", style: TextStyle(color: Colors.white),),
+        backgroundColor: Colors.purple,
         actions: [
           Consumer<CartProvider>(
             builder: (context, card, child) {
