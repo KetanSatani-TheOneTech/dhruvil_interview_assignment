@@ -1,4 +1,5 @@
 import 'package:dhruvil_interview_assignment/providers/cart_provider.dart';
+import 'package:dhruvil_interview_assignment/screens/cart/cart_screen.dart';
 import 'package:dhruvil_interview_assignment/screens/product/product_detail_screen.dart';
 import 'package:dhruvil_interview_assignment/screens/product/widgets/count_badge_widget.dart';
 import 'package:flutter/material.dart';
@@ -45,27 +46,40 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Product Listing", style: TextStyle(color: Colors.white),),
+        title: Text(
+          "Product Listing",
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.purple,
         actions: [
           Consumer<CartProvider>(
             builder: (context, card, child) {
-              return Stack(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.shopping_cart,
-                      color: Colors.white,
-                      size: 25,
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CartScreen(),
                     ),
-                  ),
-                  Positioned(
-                    right: 0,
-                    top: 0,
-                    child: countBadge(cartProvider.cartItems.length),
-                  ),
-                ],
+                  );
+                },
+                child: Stack(
+                  children: [
+                    IconButton(
+                      onPressed: null,
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        color: Colors.white,
+                        size: 25,
+                      ),
+                    ),
+                    Positioned(
+                      right: 0,
+                      top: 0,
+                      child: countBadge(cartProvider.cartItems.length),
+                    ),
+                  ],
+                ),
               );
             },
           )
@@ -74,14 +88,17 @@ class _ProductListScreenState extends State<ProductListScreen> {
       body: Column(
         children: [
           // Category Filter
-          SizedBox(
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 10),
             height: 50,
             child: ListView(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(horizontal: 8),
               children: productProvider.categories.map((category) {
                 return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 4.0),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 4.0,
+                  ),
                   child: ChoiceChip(
                     label: Text(category),
                     selected: productProvider.selectedCategory == category,

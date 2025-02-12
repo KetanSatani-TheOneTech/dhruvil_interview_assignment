@@ -11,10 +11,22 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('Product: ${product.toJson()}');
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
+    ValueNotifier<bool> isProductAdded = ValueNotifier(false);
+    Product? tempProduct;
+
+    /*if (cartProvider.cartItems.isNotEmpty) {
+      try {
+        tempProduct = cartProvider.cartItems.map((cartItem) => cartItem.id == product.id, orElse: null);
+      } catch (e, st) {
+        debugPrint("e: $e, st: $st");
+      }
+      isProductAdded.value = tempProduct?.id == product.id;
+    }*/
 
     return Scaffold(
-      appBar: AppBar(title: Text(product.title)),
+      appBar: AppBar(title: Text(product.title),),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,25 +77,68 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 24),
 
-                  // Add to Cart Button
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton.icon(
-                      icon: Icon(Icons.shopping_cart),
-                      label: Text("Add to Cart"),
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 14),
-                        textStyle: TextStyle(fontSize: 18),
-                      ),
-                      onPressed: () {
-                        cartProvider.addToCart(product);
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text("Added to Cart"),
-                          duration: Duration(seconds: 1),
-                        ));
-                      },
-                    ),
-                  ),
+                  ValueListenableBuilder(
+                    valueListenable: isProductAdded,
+                    builder: (context, value, child) {
+                      if (isProductAdded.value) {
+                        // Remove from Cart Button
+                        return SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton.icon(
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              color: Colors.white,
+                            ),
+                            label: Text(
+                              "Remove from Cart",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.symmetric(vertical: 14),
+                              textStyle: TextStyle(fontSize: 18, color: Colors.white),
+                              backgroundColor: isProductAdded.value?Colors.red:Colors.purple,
+                            ),
+                            onPressed: () {
+                              cartProvider.removeFromCart(product);
+                              isProductAdded.value = false;
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text("Removed from Cart"),
+                                duration: Duration(seconds: 1),
+                              ));
+                            },
+                          ),
+                        );
+                      } else {
+                        // Add to Cart Button
+                        return SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton.icon(
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              color: Colors.white,
+                            ),
+                            label: Text(
+                              "Add to Cart",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.symmetric(vertical: 14),
+                              textStyle: TextStyle(fontSize: 18, color: Colors.white),
+                              backgroundColor: isProductAdded.value?Colors.red:Colors.purple,
+                            ),
+                            onPressed: () {
+                              cartProvider.addToCart(product);
+                              isProductAdded.value = true;
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text("Added to Cart"),
+                                duration: Duration(seconds: 1),
+                              ));
+                            },
+                          ),
+                        );
+                      }
+                    },
+                  )
                 ],
               ),
             ),

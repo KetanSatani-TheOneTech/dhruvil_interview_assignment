@@ -92,8 +92,9 @@ class _AuthScreenState extends State<AuthScreen> {
                 height: 20,
               ),
               ElevatedButton(
+                style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.purple)),
                 onPressed: _submit,
-                child: Text(_isLogin ? "Login" : "Sign Up"),
+                child: Text(_isLogin ? "Login" : "Sign Up", style: TextStyle(color: Colors.white),),
               ),
               TextButton(
                 onPressed: () => setState(() {

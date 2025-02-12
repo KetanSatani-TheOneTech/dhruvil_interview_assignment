@@ -28,6 +28,18 @@ class Product {
       rating: Rating.fromJson(json['rating']),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'price': price,
+      'category': category,
+      'image': image,
+      'rating': rating,
+    };
+  }
 }
 
 class Rating {

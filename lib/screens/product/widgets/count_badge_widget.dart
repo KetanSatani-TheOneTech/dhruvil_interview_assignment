@@ -5,7 +5,7 @@ Widget countBadge(int count) {
     margin: EdgeInsets.all(2),
     padding: EdgeInsets.symmetric(horizontal: count > 9 ? 10 : 8, vertical: 2),
     decoration: BoxDecoration(
-      color: Colors.green,
+      color: Colors.orange,
       borderRadius: BorderRadius.circular(20),
     ),
     child: Text(
