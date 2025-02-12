@@ -16,17 +16,23 @@ class ProductDetailsScreen extends StatelessWidget {
     ValueNotifier<bool> isProductAdded = ValueNotifier(false);
     Product? tempProduct;
 
-    /*if (cartProvider.cartItems.isNotEmpty) {
+    if (cartProvider.cartItems.isNotEmpty) {
       try {
-        tempProduct = cartProvider.cartItems.map((cartItem) => cartItem.id == product.id, orElse: null);
+        for (var entry in cartProvider.cartItems.values) {
+          tempProduct = entry['product'] as Product;
+        }
       } catch (e, st) {
         debugPrint("e: $e, st: $st");
       }
       isProductAdded.value = tempProduct?.id == product.id;
-    }*/
+    }
 
     return Scaffold(
-      appBar: AppBar(title: Text(product.title),),
+      appBar: AppBar(
+        title: Text(product.title, style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.purple,
+        iconTheme: IconThemeData(color: Colors.white),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,7 +102,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.symmetric(vertical: 14),
                               textStyle: TextStyle(fontSize: 18, color: Colors.white),
-                              backgroundColor: isProductAdded.value?Colors.red:Colors.purple,
+                              backgroundColor: isProductAdded.value ? Colors.red : Colors.purple,
                             ),
                             onPressed: () {
                               cartProvider.removeFromCart(product);
@@ -124,7 +130,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.symmetric(vertical: 14),
                               textStyle: TextStyle(fontSize: 18, color: Colors.white),
-                              backgroundColor: isProductAdded.value?Colors.red:Colors.purple,
+                              backgroundColor: isProductAdded.value ? Colors.red : Colors.purple,
                             ),
                             onPressed: () {
                               cartProvider.addToCart(product);

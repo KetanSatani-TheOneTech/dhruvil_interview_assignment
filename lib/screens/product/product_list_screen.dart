@@ -54,7 +54,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
         actions: [
           Consumer<CartProvider>(
             builder: (context, card, child) {
-              return InkWell(
+              return GestureDetector(
                 onTap: () {
                   Navigator.push(
                     context,
