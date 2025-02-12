@@ -82,7 +82,12 @@ class _AuthScreenState extends State<AuthScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text("The Forgot screen will open from here"),
+                          duration: Duration(seconds: 3),
+                        ));
+                      },
                       child: Text(_isLogin ? "Forgot password?" : ""),
                     ),
                   ],
