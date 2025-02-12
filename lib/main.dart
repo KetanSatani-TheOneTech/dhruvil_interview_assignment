@@ -5,7 +5,7 @@ import 'package:dhruvil_interview_assignment/screens/product/product_list_screen
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/auth_provider.dart';
+import 'providers/auth_provider.dart';
 
 void main() {
   runApp(

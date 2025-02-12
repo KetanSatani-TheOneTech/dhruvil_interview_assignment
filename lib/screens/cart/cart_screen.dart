@@ -48,7 +48,7 @@ class CartScreen extends StatelessWidget {
                       ),
                       // Now correctly using product title
                       subtitle: Text(
-                          "Original Price:${product.price}\nItem Total: \$${(product.price * quantity).toStringAsFixed(2)}"),
+                          "Original Price: ${product.price}\nItem Total: \$${(product.price * quantity).toStringAsFixed(2)}"),
                       // Using actual product price
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,

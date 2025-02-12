@@ -20,11 +20,14 @@ class ProductDetailsScreen extends StatelessWidget {
       try {
         for (var entry in cartProvider.cartItems.values) {
           tempProduct = entry['product'] as Product;
+          if (tempProduct.id == product.id) {
+            isProductAdded.value = tempProduct.id == product.id;
+            break;
+          }
         }
       } catch (e, st) {
         debugPrint("e: $e, st: $st");
       }
-      isProductAdded.value = tempProduct?.id == product.id;
     }
 
     return Scaffold(
